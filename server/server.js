@@ -1,8 +1,14 @@
+const {instrument} = require('@socket.io/admin-ui')
 const io = require("socket.io")(3000, {
   cors: {
-    origin: ["http://localhost:8080"],
+    origin: ["http://localhost:8080", "https://admin.socket.io"],
   },
 });
+
+const userIo = io.of('/user')
+userIo.on('connection', socket => {
+  console.log('connected to user namespace')
+})
 
 io.on("connection", (socket) => {
   console.log(socket.id);
@@ -19,3 +25,6 @@ io.on("connection", (socket) => {
     cb(`joined ${room}`);
   });
 });
+ 
+
+instrument(io, {auth: false})
