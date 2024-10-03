@@ -1,36 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>websocket</title>
     <script src="script.js" type="module"></script>
     <style>
-        body{
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            height: 100vh;
-            width: 90%;
-            max-width: 1200px;
-        }
-        #message-container{
-            border: 1px solid black;
-            padding: 5px
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        width: 90%;
+        max-width: 1200px;
+        background: #fff;
+      }
+
+      #message-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 2px solid #333;
+        width: 100%;
+        max-width: 600px;
+        height: 80vh;
+        padding: 10px;
+        border-radius: 10px;
+        background: fff;
+      }
+
+      #messages {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding-right: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .message {
+        padding: 8px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border: 1px solid #aaa;
+        word-wrap: break-word;
+      }
+
+      form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      #message-input,
+      #room-input {
+        flex-grow: 1;
+        padding: 10px;
+        border: 1px solid #333;
+        border-radius: 5px;
+        font-size: 1rem;
+        outline: none;
+      }
+
+      button {
+        padding: 10px 15px;
+        border: 1px solid #333;
+        border-radius: 5px;
+        background: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #ddd;
+      }
+
+      label {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="message-container">
-        <form  id="form">
-            <label for="message-input">Message</label>
-            <input type="text" id="message-input">
-            <button type="submit" id="send-button">Send</button>
-            <label for="room-input">Room</label>
-            <input type="text" id="room-input">
-            <button type="button" id="room-button">Join</button>
-        </form>
+      <div id="messages"></div>
+      <form id="form">
+        <input
+          type="text"
+          id="message-input"
+          placeholder="type your message"
+          required
+        />
+        <button type="submit" id="send-button">Send</button>
+      </form>
+      <form id="room-form">
+        <input type="text" id="room-input" placeholder="enter room name" />
+        <button type="button" id="room-button">Join Room</button>
+      </form>
     </div>
-</body>
+  </body>
 </html>

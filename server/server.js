@@ -6,9 +6,10 @@ const io = require("socket.io")(3000, {
 });
 
 const userIo = io.of("/user");
+
 userIo.on("connection", (socket) => {
   console.log("connected to user namespace");
-  console.log("connected to user namespace with username" + socket.username);
+  console.log("connected to user namespace with username " + socket.username);
 });
 
 userIo.use((socket, next) => {
@@ -23,16 +24,18 @@ userIo.use((socket, next) => {
 function getUsernameFromToken(token) {
   return token;
 }
+
 io.on("connection", (socket) => {
   console.log(socket.id);
+
   socket.on("send-message", (message, room) => {
     if (room === "") {
       socket.broadcast.emit("receive-message", message);
-      console.log(message);
     } else {
-      socket.to(room);
+      socket.to(room).emit("receive-message", message);
     }
   });
+
   socket.on("join-room", (room, cb) => {
     socket.join(room);
     cb(`joined ${room}`);

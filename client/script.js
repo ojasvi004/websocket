@@ -2,7 +2,6 @@ import { io } from "socket.io-client";
 
 const joinRoomButton = document.getElementById("room-button");
 const messageInput = document.getElementById("message-input");
-
 const roomInput = document.getElementById("room-input");
 const form = document.getElementById("form");
 
@@ -16,7 +15,7 @@ socket.on("connect", () => {
 });
 
 userSocket.on("connect_error", (error) => {
-  displayMessage(error);
+  displayMessage(error.message); 
 });
 
 socket.on("receive-message", (message) => {
@@ -25,7 +24,7 @@ socket.on("receive-message", (message) => {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const message = messageInput.value;
+  const message = messageInput.value.trim();
   const room = roomInput.value;
 
   if (message === "") return;
